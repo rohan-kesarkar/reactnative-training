@@ -6,3 +6,5 @@ $ npx expo install react-native-reanimated
 $ npx expo install react-native-screens
 $ npx expo install @react-native-community/masked-view
 $ npx expo install react-native-safe-area-context
+
+https://github.com/react-native-community/hooks/blob/master/src/useBackHandler.ts

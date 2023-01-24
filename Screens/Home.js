@@ -28,7 +28,7 @@ const ListButton = ({ title, color, navigation, onDelete, name }) => {
 const renderAddListIcon = (addProject)=>{
     return(
         <TouchableOpacity onPress={()=>addProject({title:'Title', color:Colors.olive})} >
-            <Text style={styles.icon} >Add</Text>
+            <Text style={styles.icon} >+</Text>
         </TouchableOpacity>
     )
 }
@@ -38,20 +38,38 @@ const projects = [{name:"humpy",  title: "Bank-Design Phase", color: Colors.gree
 {name:"anvesh",  title: "Food App - Testing Phase", color: Colors.purple }]
 
 const Home = ({navigation}) => {
-    const onDelete=()=>{
-        
+    const [project, setProject] = useState(projects)
+
+
+    const addProject = ()=>{
+        setProject([...project, project])
     }
+
+    const removeProject = (index) => {
+        // project.splice(index, 1)
+        // setProject([...project])
+        let projectsCopy = [...project];
+        projectsCopy.splice(index, 1);
+        setProject(projectsCopy);
+      };
+
+    //   useLayoutEffect(()=>{
+    //     navigation.setOpions({
+    //         headerRight:()=><renderAddListIcon addProject={addProject} />
+    //     })
+    //   })
     return (
         <View style={styles.container}>
             <Text>Router app by Naveen(Senior software developer)</Text>
             {/* <ListButton title='Bank-Design Phase' />
             <ListButton title='Mutual Fund Analysis' />
             <ListButton title='Food App - Testing Phase' /> */}
-            <FlatList data={projects} renderItem={({item:{title,color, name}, index})=>{
+            <FlatList data={project} renderItem={({item:{title,color, name}, index})=>{
                 return(
-                    <ListButton title={title} color={color} navigation={navigation} name={name} onDelete={onDelete}/>
+                    <ListButton title={title} color={color} navigation={navigation} name={name} onDelete={()=>{removeProject(index)}}  />
                 )
             }} />
+        
 
         </View>
     )
